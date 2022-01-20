@@ -39,7 +39,6 @@ def get_services_phones_number(file_path):
         for url in urls_list:
             time.sleep(randrange(1, 4))
             response = r.get(url, headers=headers)
-            # print(url)
             soup = BeautifulSoup(response.text, 'lxml')
             """ шукаємо кількість сторінок """
             try:
@@ -52,7 +51,6 @@ def get_services_phones_number(file_path):
                 time.sleep(randrange(1, 4))
                 phone_number_list = []
                 response = r.get(url=f'{url}/page/{page}', headers=headers)
-                print(response.url)
                 soup = BeautifulSoup(response.text, 'lxml')
                 print(f'Обробив {page}/{pagination_count}')
                 phone_number = soup.find_all('a', class_='js-store-user-action-statistic')
@@ -61,13 +59,12 @@ def get_services_phones_number(file_path):
                     """ записуємо номери в список """
                     the_num = pn.get('data-adtext')
                     phone_number_list.append(the_num)
-                    print(phone_number_list)
 
                 with open(f'phones.txt', 'a+') as file:
                     for pns in phone_number_list:
                         file.write(f'{pns}\n')
     except:
-        print('шось пішло не так')
+        print('Файл не знайдено, або посилання не правильне')
 
 
 def main():
