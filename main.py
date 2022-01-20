@@ -45,6 +45,7 @@ def get_services_phones_number(file_path):
                 pagination_count = int(soup.find('div', class_='pagination-sunshine').find_all('a')[-1].text)
             except:
                 print("Лиш одна сторінка")
+                pagination_count = 1
             # print(pagination_count)
             """ проходимось по кожній сторінці, підставивши цифру сторінки в ссилку """
             for page in range(1, pagination_count + 1):
